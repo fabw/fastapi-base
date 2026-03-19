@@ -1,32 +1,27 @@
 from fastapi import FastAPI
 from db import conectar_db
+from llamar_api import buscar_noticias
+
+
+
 app = FastAPI()
+
+
+
+
 
 @app.get("/listo")
 def home():
     return {"status": "ok", "mensaje": "API funcionando 🚀"}
 
 
-@app.post("/login")
-def login(email: str, password: str):
+@app.get("/buscar_noticias")
+def obtener_noticias():
+    query = "chile"
 
-    # 1. conectar a la DB
-    conn = conectar_db()
-    cursor = conn.cursor()
+    noticias = buscar_noticias(query)
 
-    # 2. ejecutar query
-    query = "SELECT * FROM usuarios WHERE email = %s AND password = %s"
-    cursor.execute(query, (email, password))
 
-    # 3. obtener resultado
-    user = cursor.fetchone()
-
-    # 4. cerrar conexión
-    cursor.close()
-    conn.close()
-
-    # 5. lógica con Python
-    if user:
-        return {"mensaje": "Login exitoso"}
-    else:
-        return {"error": "Credenciales incorrectas"}
+    return {
+        "noticias":noticias
+    }
