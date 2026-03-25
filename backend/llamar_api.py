@@ -8,11 +8,13 @@ def buscar_noticias(query):
     params = {
         "q":query,
         "language":"es",
-        "apiKey":"aa7575b28a444037859696a6db42856c"
+        "apiKey":"a70ac0c4572441c0a4b7a0d080adc90d"
     }
 
     response = requests.get(url, params=params)
     data = response.json()
+
+    print(data)
 
     return  data.get("articles" , [])
     
