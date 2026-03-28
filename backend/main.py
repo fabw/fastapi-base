@@ -39,15 +39,14 @@ def listar_noticias():
     conn.close()
     news = []
     for n in noticias:
-        noticias.append({
+        news.append({
             "titulo": n[0],
             "description":n[1]
         
         })
-        return noticias
+        return news
     
 
-    
 
 
 
